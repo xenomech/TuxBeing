@@ -23,3 +23,6 @@ chill!
 4. Full screen app
 
 5. Anti-kill ability
+
+# Bugs
+1. program crashes on opening new program

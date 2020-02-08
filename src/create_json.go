@@ -29,6 +29,7 @@ func exe_cmd(cmd string)(string) {
 	parts = parts[1:len(parts)]
 	out, err := exec.Command(head,parts...).Output()
 	if err != nil {
+		fmt.Println(cmd)
 	  fmt.Printf("Error:%s", err)
 	}
 	arg := string(out)
@@ -39,35 +40,44 @@ func exe_cmd(cmd string)(string) {
 
 func main(){
 	// car current_details = getFromJson()
-	var  current_details = make([]Process,100)
+	var  current_details = make([]Process,0)
 	var command = "xdotool getwindowfocus   getwindowpid"
 	var previous_command = exe_cmd(command)
 	var time_command = time.Now()
-	// fmt.Print("time_command:%s",time_command)
 	var process_name = exe_cmd(command)
 	current_details = append(current_details,Process{
 		Name: process_name,
 		Time: 0,
 	})
+	// fmt.Println(current_details)
 	for{
+		flag :=1
 		process_name = exe_cmd(command)
-		// fmt.Printf(process_name)
 		if process_name != previous_command{
-			fmt.Println()
 			current_time := time.Now()
 			time_used := current_time.Sub(time_command).Hours()
 			// current_details = addToJson(current_details,process_name,time_used)
-			current_details = append(current_details,Process{
-				Name:process_name,
-				Time:time_used,
-			})
-			fmt.Println(current_details)
+			for _,data := range current_details{
+				if data.Name == process_name && flag == 1{
+					cur_time := data.Time
+					cur_time += time_used
+					data.Time = cur_time
+					flag = 0
+				}
+			}
+			if flag ==1{
+				current_details = append(current_details,Process{
+					Name:process_name,
+					Time:time_used,
+				})
+			}
 			time_command = current_time
 			previous_command = process_name
-			json_data,_ := json.Marshal(current_details)
+			json_data,err := json.Marshal(current_details)
+			if err != nil{
+				fmt.Println("error_jsonMarshal:%s",err)
+			}
 			ioutil.WriteFile("output.json", json_data,0644)
-			// fmt.Println(t)
-			// fmt.Println(reflect.TypeOf(t))
 		}
 	}
 }
