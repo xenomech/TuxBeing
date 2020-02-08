@@ -13,7 +13,11 @@ chill!
 Planed add-ons for comming updates
 
 #1 App time duration using xdotool
+
 #2 project time duration calculating using duration time
+
 #3 Pie chart of time duration 
+
 #4 Full screen app
+
 #5 Anti-kill ability
