@@ -1,33 +1,23 @@
 package main
 
 import (
-	"bytes"
-	"fmt"
-	"log"
 	"os/exec"
 	"strings"
+	"time"
 )
 
-func exe_cmd(cmd string)(string) {
+func exe_cmd(cmd string){
 	parts := strings.Fields(cmd)
 	head := parts[0]
 	parts = parts[1:len(parts)]
-	out, err := exec.Command(head,parts...).Output()
-	if err != nil {
-		fmt.Println(cmd)
-	  fmt.Printf("Error:%s", err)
-	  return "err"
-	}
+	exec.Command(head,parts...).Output()
 	}
 
 func main() {
-		flag:=1
-		var command = "xdotool disable _________"
+		// counter:=1
+		var command = "xinput disable 17"
 		exe_cmd(command)
-	for{
-		if(flag==120){
-				var command = "xdotool enable _________"
-				exe_cmd(command)
-			}
-	}
+		time.Sleep(120*time.Second)
+		var command1 = "xinput enable 17"
+		exe_cmd(command1)
 }
