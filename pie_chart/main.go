@@ -1,7 +1,6 @@
 package main
 
 //go:generate go run main.go
-
 import (
 	"os"
 
@@ -13,7 +12,7 @@ func main() {
 		Width:  512,
 		Height: 512,
 		Values: []chart.Value{
-			{Value: 5, Label: "Blue"},
+			{Value: 10, Label: "Blue"},
 			{Value: 5, Label: "Green"},
 			{Value: 4, Label: "Gray"},
 			{Value: 4, Label: "Orange"},
