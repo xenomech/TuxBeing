@@ -1,15 +1,16 @@
 package main
 
 import (
-	"fyne.io/fyne/widget"
 	"fyne.io/fyne/app"
+	"fyne.io/fyne/widget"
 )
-func main() {
 
+func main() {
+	app := app.New()
 	overidewindow := app.NewWindow("overide")
 	overidewindow.SetContent(widget.NewVBox(
 		widget.NewLabel("Are You Sure??"),
-		widget.NewButton("Yes !",func(){overidewindow.Quit()}),
-		widget.NewButton("No",func(){}),))
+		widget.NewButton("Yes !", func() { app.Quit() }),
+		widget.NewButton("No", func() {})))
 	overidewindow.ShowAndRun()
 }
