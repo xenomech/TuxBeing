@@ -9,7 +9,7 @@ import(
 	"io/ioutil"
 )
 type Process struct{
-	Name string `json:name"`
+	Name string `json:"name"`
 	Time float64 `json:"time"`
 }
 func get_process_name(arg string)(string){

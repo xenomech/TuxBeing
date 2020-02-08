@@ -9,7 +9,7 @@ import (
 )
 
 type Process struct{
-	Name string `json:name"`
+	Name string `json:"name"`
 	Time float64 `json:"time"`
 }
 
@@ -25,14 +25,16 @@ func hello(w http.ResponseWriter, r *http.Request) {
     case "GET":     
 
         jsonFile,_ := os.Open("../../src/output.json")
-        user_data, err  := ioutil.ReadAll(jsonFile) 
-        var data []Process
-        json.Unmarshal(user_data, &data)
-        if err !=nil {
-            fmt.Println("error:%s", err)
-        }
-        json.NewEncoder(w).Encode(data)
-
+         user_data, err  := ioutil.ReadAll(jsonFile) 
+         var data []Process
+         json.Unmarshal(user_data, &data)
+         if err !=nil {
+             fmt.Println("error:%s", err)
+         }
+         
+         w.Header().Set("Content-Type", "application/json; charset=utf-8")
+         w.Header().Set("Access-Control-Allow-Origin", "*")
+         json.NewEncoder(w).Encode(data)
     case "POST":
         // Call ParseForm() to parse the raw query and update r.PostForm and r.Form.
         if err := r.ParseForm(); err != nil {
