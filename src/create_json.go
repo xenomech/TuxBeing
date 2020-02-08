@@ -3,6 +3,7 @@ package main
 import(
 	"fmt"
 	"encoding/json"
+	"os"
 	"os/exec"
 	"strings"
 	"time"
@@ -42,25 +43,38 @@ func exe_cmd(cmd string)(string) {
 	process_name = process_name[:len(process_name) -1]
 	return process_name
 }
-func lock_screen(){
-	fmt.Printf("in lock screen: %d", time.Now().Unix())
-	time.Sleep(30 * time.Second)
-	fmt.Printf("After sleep: %d", time.Now().Unix())
-	lock_screen()
+func file_exists(name string) bool {
+    if _, err := os.Stat(name); err != nil {
+        if os.IsNotExist(err) {
+            return false
+        }
+    }
+    return true
 }
 
 func main(){
-	// go lock_screen()
-	// car current_details = getFromJson()
-	var  current_details = make([]Process,0)
+	var current_details []Process
 	var command = "xdotool getwindowfocus   getwindowpid"
+	var process_name = exe_cmd(command)
+	if file_exists("output.json"){
+		data, err := ioutil.ReadFile("output.json")
+		if err != nil{
+			fmt.Println("Error:",err)
+		}
+		err = json.Unmarshal(data, &current_details)
+		if err != nil{
+			fmt.Println("Error:",err)
+		}
+	}else{
+		current_details = make([]Process,0)
+		current_details = append(current_details,Process{
+			Name: process_name,
+			Time: 0,
+	})
+	}
 	var previous_command = exe_cmd(command)
 	var time_command = time.Now()
-	var process_name = exe_cmd(command)
-	current_details = append(current_details,Process{
-		Name: process_name,
-		Time: 0,
-	})
+	
 	// fmt.Println(current_details)
 	for{
 		flag :=1
