@@ -18,8 +18,8 @@ func main() {
 		widget.NewButton("Quit", func() {
 			app.Quit()
 		}),
-		
 	))
+	
 	w.ShowAndRun()
 
 }
