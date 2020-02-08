@@ -9,6 +9,8 @@ this app remind you to take a brake and just contemplate !!
 
 chill!
 
+# Requirments
+1. xdotool
 
 # Planed add-ons for comming updates
 
