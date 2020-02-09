@@ -45,12 +45,13 @@ $(document).ready(function () {
                 legend: {
                     cursor: "pointer",
                     itemclick: explodePie,
+                    fontWeight: "normal",
                 },
                 data: [{
                     type: "doughnut",
-                    innerRadius: 120,
+                    innerRadius: 160,
                     radius: "100%",
-                    indexLabelFontSize: 19,
+                    indexLabelFontSize: 20,
                     showInLegend: true,
                     toolTipContent: "<b>{name}</b>: {y} (#percent%)",
                     indexLabel: "{name} - #percent%",
@@ -201,6 +202,9 @@ window.onload = function () {
                 url: "http://192.168.63.63:8080/disable/",
                 data: {}
             })
+            document.getElementById('timera').innerHTML =
+                " 0:00 !You are reday to Hack!";
+
         }
     }
 
