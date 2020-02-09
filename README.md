@@ -11,7 +11,7 @@ chill!
 # Requirments
 
 1. xdotool
-2.xorg-xinput
+2. xorg-xinput
 
 
 # Planed add-ons for comming updates
