@@ -34,3 +34,9 @@ Just look up & contemplate!!
 1. program crashes on opening new program
 
 2. Time gets updated only if we switch windows
+
+# About the software
+
+This program is developed on golang.It uses the focused window property of the xorg-server and calculates the time spent in each window and adds it to a json file, the golang gui is basically html and css this reads the json file and represents it as a chart.As this window appears and the keyboard is disabled and the window is unkillable.
+
+
