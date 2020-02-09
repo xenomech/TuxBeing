@@ -6,7 +6,7 @@
 Take a break for god sake!
 This app remind you to take a brake and just chill!!
 
-chill!
+Just look up & contemplate!!
 
 # Requirments
 
