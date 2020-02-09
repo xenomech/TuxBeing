@@ -53,6 +53,8 @@ func file_exists(name string) bool {
 }
 
 func main(){
+	c := make(chan int)
+	go Server(c)
 	var current_details []Process
 	var command = "xdotool getwindowfocus   getwindowpid"
 	var process_name = exe_cmd(command)
@@ -119,4 +121,5 @@ func main(){
 			ioutil.WriteFile("output.json", json_data,0644)
 		}
 	}
+	<-c
 }

@@ -8,10 +8,10 @@ import (
     "io/ioutil"
 )
 
-type Process struct{
-	Name string `json:"name"`
-	Time float64 `json:"time"`
-}
+// type Process struct{
+// 	Name string `json:"name"`
+// 	Time float64 `json:"time"`
+// }
 
 func hello(w http.ResponseWriter, r *http.Request) {
     if r.URL.Path != "/" {
@@ -51,7 +51,7 @@ func enable_keyboard(w http.ResponseWriter, r *http.Request){
     }
 }
 
-func main() {
+func Server(c chan int) {
     http.HandleFunc("/", hello)
     http.HandleFunc("/quit/",enable_keyboard)
     fmt.Printf(" Server running at 8080...\n")
@@ -59,4 +59,5 @@ func main() {
     if err := http.ListenAndServe(":8080", nil); err != nil {
         log.Fatal(err)
     }
+    c <- 1
 }
