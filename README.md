@@ -1,16 +1,19 @@
 # TuxBeing
 
-Cut the crap !!
-We need a break !!!
+## Need a break ? Hava a KitKat!
 
-yes ! im  serious !
-take a break for god sake!
-this app remind you to take a brake and just contemplate !!
+
+Take a break for god sake!
+This app remind you to take a brake and just chill!!
 
 chill!
 
 # Requirments
+
 1. xdotool
+
+2.xorg-xinput
+
 
 # Planed add-ons for comming updates
 
@@ -23,6 +26,8 @@ chill!
 4. Full screen app
 
 5. Anti-kill ability
+
+6. Disable keyboard if you dont trust yourself!
 
 # Bugs
 1. program crashes on opening new program
