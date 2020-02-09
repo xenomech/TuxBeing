@@ -24,10 +24,7 @@ func get_process_name(arg string)(string){
 	}
 	return string(out)
 }
-func update_items(){
-
-}
-func exe_cmd(cmd string)(string) {
+func exe_cmd(cmd string,status int)(string) {
 	parts := strings.Fields(cmd)
 	head := parts[0]
 	parts = parts[1:len(parts)]
@@ -41,7 +38,10 @@ func exe_cmd(cmd string)(string) {
 	arg = arg[:len(arg) - 1]
 	process_name := get_process_name(arg)
 	process_name = process_name[:len(process_name) -1]
-	return process_name
+	if status ==0{
+		return process_name
+	}
+	return ""
 }
 func file_exists(name string) bool {
     if _, err := os.Stat(name); err != nil {
@@ -57,7 +57,7 @@ func main(){
 	go Server(c)
 	var current_details []Process
 	var command = "xdotool getwindowfocus   getwindowpid"
-	var process_name = exe_cmd(command)
+	var process_name = exe_cmd(command,0)
 	if file_exists("output.json"){
 		data, err := ioutil.ReadFile("output.json")
 		if err != nil{
@@ -74,26 +74,22 @@ func main(){
 			Time: 0,
 	})
 	}
-	var previous_command = exe_cmd(command)
+	var previous_command = exe_cmd(command,0)
 	var time_command = time.Now()
-	
-	// fmt.Println(current_details)
+
 	for{
 		flag :=1
-		process_name = exe_cmd(command)
+		process_name = exe_cmd(command,0)
 		if process_name == "err"{
 			break
 		}
 		if process_name != previous_command{
 			current_time := time.Now()
 			time_used := current_time.Sub(time_command).Hours()
-			// test_array := current_details
-			// current_details = addToJson(current_details,process_name,time_used)
 			for index,data := range current_details{
 				if data.Name == process_name && flag == 1{
 					cur_time := data.Time
 					cur_time += time_used
-					// data.Time = cur_time
 					current_details[index] = current_details[len(current_details)-1]
 					current_details = current_details[:len(current_details)-1]
 					current_details = append(current_details,Process{
@@ -103,15 +99,12 @@ func main(){
 					flag = 0
 				}
 			}
-			fmt.Println("After forloop")
-			fmt.Println(current_details)
 			if flag ==1{
 				current_details = append(current_details,Process{
 					Name:process_name,
 					Time:time_used,
 				})
 			}
-			fmt.Println(current_details)
 			time_command = current_time
 			previous_command = process_name
 			json_data,err := json.Marshal(current_details)
