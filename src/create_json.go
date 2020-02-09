@@ -34,14 +34,15 @@ func exe_cmd(cmd string,status int)(string) {
 	  fmt.Printf("Error:%s", err)
 	  return "err"
 	}
+	if status ==1{
+		return " "
+	}
 	arg := string(out)
 	arg = arg[:len(arg) - 1]
 	process_name := get_process_name(arg)
 	process_name = process_name[:len(process_name) -1]
-	if status ==0{
-		return process_name
-	}
-	return ""
+	// if status ==0{
+	return process_name
 }
 func file_exists(name string) bool {
     if _, err := os.Stat(name); err != nil {
@@ -54,7 +55,9 @@ func file_exists(name string) bool {
 
 func main(){
 	c := make(chan int)
+	d := make(chan int)
 	go Server(c)
+	go ui(d)
 	var current_details []Process
 	var command = "xdotool getwindowfocus   getwindowpid"
 	var process_name = exe_cmd(command,0)
@@ -115,4 +118,5 @@ func main(){
 		}
 	}
 	<-c
+	<-d
 }
