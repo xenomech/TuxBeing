@@ -39,6 +39,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
     }
 }
 func enable_keyboard(w http.ResponseWriter, r *http.Request){
+    fmt.Println("Enabling keyboard")
     if r.URL.Path != "/quit/" {
         http.Error(w, "Unauthorized", http.StatusUnauthorized)
         return
@@ -53,6 +54,7 @@ func enable_keyboard(w http.ResponseWriter, r *http.Request){
 }
 
 func disable_keyboard(w http.ResponseWriter, r *http.Request){
+    fmt.Println("Disabling keyboard")
     if r.URL.Path != "/disable/" {
         http.Error(w,"Unauthorized", http.StatusUnauthorized)
         return
@@ -69,7 +71,7 @@ func disable_keyboard(w http.ResponseWriter, r *http.Request){
 func Server(c chan int) {
     http.HandleFunc("/", hello)
     http.HandleFunc("/quit/",enable_keyboard)
-    http.HandleFunc("disable/",disable_keyboard)
+    http.HandleFunc("/disable/",disable_keyboard)
     fmt.Printf(" Server running at 8080...\n")
 
     if err := http.ListenAndServe(":8080", nil); err != nil {
