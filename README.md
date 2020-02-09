@@ -12,6 +12,9 @@ Just look up & contemplate!!
 
 1. xdotool
 2. xorg-xinput
+3. go
+4. go webkit
+5. 
 
 
 # Planed add-ons for comming updates
