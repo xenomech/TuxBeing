@@ -1,11 +1,12 @@
 package main
+
 import (
-    "fmt"
-    "log"
-    "net/http"
-    "os"
-    "encoding/json"
-    "io/ioutil"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"os"
 )
 
 // type Process struct{
@@ -14,29 +15,29 @@ import (
 // }
 
 func hello(w http.ResponseWriter, r *http.Request) {
-    if r.URL.Path != "/" {
-        http.Error(w, "Unauthorized", http.StatusUnauthorized)
-        return
-    }
+	if r.URL.Path != "/" {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
 
-    switch r.Method {
+	switch r.Method {
 
     case "GET" :
 
-        jsonFile,_ := os.Open("output.json")
-         user_data, err  := ioutil.ReadAll(jsonFile)
-         var data []Process
-         json.Unmarshal(user_data, &data)
-         if err !=nil {
-             fmt.Println("error:%s", err)
-         }
-         w.Header().Set("Content-Type", "application/json; charset=utf-8")
-         w.Header().Set("Access-Control-Allow-Origin", "*")
-         json.NewEncoder(w).Encode(data)
+		jsonFile, _ := os.Open("output.json")
+		user_data, err := ioutil.ReadAll(jsonFile)
+		var data []Process
+		json.Unmarshal(user_data, &data)
+		if err != nil {
+			fmt.Println("error:%s", err)
+		}
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		json.NewEncoder(w).Encode(data)
 
-    default:
-        fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
-    }
+	default:
+		fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
+	}
 }
 func enable_keyboard(w http.ResponseWriter, r *http.Request){
     fmt.Println("Enabling keyboard")

@@ -12,6 +12,9 @@ Just look up & contemplate!!
 
 1. xdotool
 2. xorg-xinput
+3. go
+4. go webkit
+5. json handler
 
 
 # Planed add-ons for comming updates
@@ -34,3 +37,10 @@ Just look up & contemplate!!
 1. program crashes on opening new program
 
 2. Time gets updated only if we switch windows
+
+# About the software
+
+Developers work day and night to provide an exquisite experience to the user, This program is developed for those programmers who work all day every day , when they use this app it shows all the usage of the variety of apps they use this helps them find a balance with technology. 
+This program is developed on golang. It uses the focused window property of the Xorg-server and calculates the time spent in each window and adds it to a JSON file, the golang GUI reads the JSON file from the backend create_json server app and represents it as a chart. As this window appears and the keyboard is disabled and the window is unkillable. This helps a developer to take a break at regular intervals and help manage a digital wellbeing.
+
+
