@@ -63,7 +63,23 @@ func enable_keyboard(w http.ResponseWriter, r *http.Request){
         http.Error(w, "404 not found. DEFAULT", http.StatusNotFound)
     }
 }
-
+func enable_only(w http.ResponseWriter, r *http.Request){
+    fmt.Println("Enabling keyboard")
+    if r.URL.Path != "/enable/" {
+        http.Error(w, "Unauthorized", http.StatusUnauthorized)
+        return
+    }
+    switch r.Method {
+    case "GET":
+        fmt.Println("GET ENABLE_ONLY")
+        var command_enable_keyboard = "xinput enable 17"
+        _ =exe_cmd(command_enable_keyboard,1)
+    default:
+        fmt.Println("METHOD!!!")
+        fmt.Println(r.Method)
+        http.Error(w, "404 not found. DEFAULT", http.StatusNotFound)
+    }
+}
 func disable_keyboard(w http.ResponseWriter, r *http.Request){
     fmt.Println("Disabling keyboard")
     if r.URL.Path != "/disable/" {
@@ -88,6 +104,7 @@ func Server(c chan int) {
     http.HandleFunc("/", hello)
     http.HandleFunc("/quit/",enable_keyboard)
     http.HandleFunc("/disable/",disable_keyboard)
+    http.HandleFunc("/enable/",enable_only)
     fmt.Printf(" Server running at 5080...\n")
 
     if err := http.ListenAndServe(":5080", nil); err != nil {

@@ -15,7 +15,7 @@ $(document).ready(function () {
     // When id with Action is clicked
     $("#Action").click(function () {
         // Load ajax.php as JSON and assign to the data variable
-        $.getJSON('http://192.168.63.63:8080', function (data) {
+        $.getJSON('http://localhost:5080', function (data) {
             // set the html content of the id myThing to the value contained in data
             console.log(data);
             dataPoints = []
@@ -117,7 +117,7 @@ updateClock();
 $("#Act").click(function () {
     if (confirm('Are you sure you want to save this thing into the database?')) {
         $.ajax({
-            url: "http://192.168.63.63:8080/quit/",
+            url: "http://localhost:5080/quit/",
             data: {}
         })
     } else {
@@ -199,7 +199,7 @@ window.onload = function () {
         if (m == 0 && s == 0) {
             console.log("powli")
             $.ajax({
-                url: "http://192.168.63.63:8080/disable/",
+                url: "http://localhost:5080/disable/",
                 data: {}
             })
             document.getElementById('timera').innerHTML =
