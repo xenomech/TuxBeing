@@ -1,6 +1,6 @@
 # TuxBeing
 
-## Need a break ? Hava a KitKat!
+## Need a break ? Have a KitKat!
 
 
 Take a break for god sake!
